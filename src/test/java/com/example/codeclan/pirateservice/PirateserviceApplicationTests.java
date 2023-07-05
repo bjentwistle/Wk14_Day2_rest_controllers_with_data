@@ -10,7 +10,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.List;
+
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @ActiveProfiles("test") //Indicates it's a test profile so will not run DataLoader
@@ -53,6 +58,14 @@ public class PirateserviceApplicationTests {
 		raid.addPirate(jack);
 		raidRepository.save(raid);
 		
+	}
+
+	@Test
+	public void canFindPiratesOfSpecificAge(){
+		List<Pirate> foundPirates = pirateRepository.findByAge(32);
+		for (Pirate pirate :foundPirates) {
+			assertTrue(pirate.getAge() == 32);
+		}
 	}
 
 
