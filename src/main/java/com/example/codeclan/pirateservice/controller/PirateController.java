@@ -1,6 +1,7 @@
 package com.example.codeclan.pirateservice.controller;
 
 import com.example.codeclan.pirateservice.models.Pirate;
+import com.example.codeclan.pirateservice.models.Raid;
 import com.example.codeclan.pirateservice.repository.PirateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,11 @@ public class PirateController {
     public ResponseEntity getPirate(@PathVariable Long id){
         return new ResponseEntity<>(pirateRepository.findById(id), HttpStatus.OK);
     }
-
+    @PostMapping(value = "/pirates")
+    public ResponseEntity<Pirate> postRaid(@RequestBody Pirate pirate){
+        pirateRepository.save(pirate);
+        return new ResponseEntity<>(pirate, HttpStatus.CREATED);
+    }
 
 
 }
